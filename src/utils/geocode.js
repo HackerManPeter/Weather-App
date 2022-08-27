@@ -1,9 +1,10 @@
 const request = require("request");
+require("dotenv").config();
 
 function geoCode(address, callback) {
   const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(
     address
-  )}.json?access_token=pk.eyJ1IjoicGVidWVrdSIsImEiOiJjbDZzNnV6ejcwcXloM2RuMjNtbjkwZm9zIn0.DQjKlqEirkDovdez1WxMvg&limit=1`;
+  )}.json?access_token=${process.env.GEOCODE_TOKEN}&limit=1`;
   request({ url, json: true }, (error, { body }) => {
     if (error) {
       callback("Unable to connect to weather services");

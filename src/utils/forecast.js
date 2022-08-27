@@ -1,7 +1,8 @@
 const request = require("request");
+require("dotenv").config();
 
 function forecast(long, lat, callback) {
-  const url = `http://api.weatherstack.com/current?access_key=b50b5b6fc90add5f75d6c8695d8d0326&query=${lat},${long}&units=f`;
+  const url = `http://api.weatherstack.com/current?access_key=${process.env.WEATHERSTACK_TOKEN}&query=${lat},${long}&units=f`;
   request({ url, json: true }, (error, { body }) => {
     if (error) {
       callback("Unable to connect to weather services");
